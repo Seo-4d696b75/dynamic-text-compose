@@ -7,11 +7,19 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
+import androidx.lifecycle.lifecycleScope
 import dagger.hilt.android.AndroidEntryPoint
+import jp.co.yumemi.dynamictextsample.domain.BootUseCase
 import jp.co.yumemi.dynamictextsample.ui.theme.DynamicTextSampleTheme
+import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+
+    @Inject
+    lateinit var bootUseCase: BootUseCase
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -24,6 +32,9 @@ class MainActivity : ComponentActivity() {
                     MainScreen()
                 }
             }
+        }
+        lifecycleScope.launch {
+            bootUseCase()
         }
     }
 }
