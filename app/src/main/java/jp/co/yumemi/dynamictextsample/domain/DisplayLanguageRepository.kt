@@ -3,6 +3,6 @@ package jp.co.yumemi.dynamictextsample.domain
 import kotlinx.coroutines.flow.StateFlow
 
 interface DisplayLanguageRepository {
-    val displayLanguage: StateFlow<DisplayLanguage>
+    val provider: StateFlow<TextProvider>
     fun onLanguageChanged(language: DisplayLanguage)
 }
