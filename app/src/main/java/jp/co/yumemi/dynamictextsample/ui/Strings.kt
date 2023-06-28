@@ -3,9 +3,10 @@ package jp.co.yumemi.dynamictextsample.ui
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.compositionLocalOf
+import androidx.compose.runtime.neverEqualPolicy
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberUpdatedState
-import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalInspectionMode
 import dagger.hilt.EntryPoint
@@ -16,7 +17,9 @@ import jp.co.yumemi.dynamictextsample.domain.DisplayLanguageRepository
 import jp.co.yumemi.dynamictextsample.domain.TextCatalog
 import jp.co.yumemi.dynamictextsample.domain.TextId
 
-val LocalTextCatalog = staticCompositionLocalOf<TextCatalog> {
+val LocalTextCatalog = compositionLocalOf<TextCatalog>(
+    policy = neverEqualPolicy(),
+) {
     TextCatalog.Initializing
 }
 
