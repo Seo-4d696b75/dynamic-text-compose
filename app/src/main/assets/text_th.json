@@ -1,0 +1,11 @@
+{
+  "app_bar_title": "แอปตัวอย่าง",
+  "home_title": "สวัสดี Android",
+  "home_body": "นี่คือแอปตัวอย่างซึ่งสามารถเปลี่ยนแปลงข้อความที่แสดงได้โดยไดนามิก",
+  "setting_title": "เลือกภาษาที่จะแสดง",
+  "setting_button": "เปลี่ยน",
+  "language_english": "ภาษาอังกฤษ",
+  "language_japanese": "ภาษาญี่ปุ่น",
+  "language_french": "ภาษาฝรั่งเศส",
+  "language_thai": "ภาษาไทย"
+}

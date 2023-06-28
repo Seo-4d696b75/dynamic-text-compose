@@ -1,0 +1,11 @@
+{
+  "app_bar_title": "サンプルアプリ",
+  "home_title": "こんにちは、Android",
+  "home_body": "これはサンプルアプリでは表示されるテキストを動的に変更することができます。",
+  "setting_title": "表示言語を選択してください",
+  "setting_button": "変更",
+  "language_english": "英語",
+  "language_japanese": "日本語",
+  "language_french": "フランス語",
+  "language_thai": "タイ語"
+}
