@@ -21,13 +21,13 @@ class SettingViewModel @Inject constructor(
     private val selectedLanguage = MutableStateFlow(DisplayLanguage.English)
 
     val uiState: StateFlow<SettingUiState> = combine(
-        displayLanguageRepository.displayLanguage,
+        displayLanguageRepository.catalog,
         selectedLanguage,
-    ) { current, selected ->
+    ) { catalog, selected ->
         SettingUiState(
             selectedLanguage = selected,
             languageList = DisplayLanguage.values().toList(),
-            isChangeEnabled = selected != current,
+            isChangeEnabled = selected != catalog.language,
         )
     }.stateIn(
         viewModelScope,

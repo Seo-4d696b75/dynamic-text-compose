@@ -29,7 +29,7 @@ import androidx.compose.ui.unit.dp
 fun <T> Spinner(
     selectedItem: T,
     items: List<T>,
-    itemLabel: (T) -> String,
+    itemLabel: @Composable (T) -> String,
     onItemSelected: (T) -> Unit,
     modifier: Modifier = Modifier,
 ) {

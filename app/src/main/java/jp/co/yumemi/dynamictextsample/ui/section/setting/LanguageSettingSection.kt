@@ -16,6 +16,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import jp.co.yumemi.dynamictextsample.domain.DisplayLanguage
+import jp.co.yumemi.dynamictextsample.domain.TextId
+import jp.co.yumemi.dynamictextsample.ui.stringResource
 import jp.co.yumemi.dynamictextsample.ui.theme.DynamicTextSampleTheme
 
 @Composable
@@ -46,11 +48,11 @@ fun SettingSection(
     Column(
         modifier = modifier.fillMaxWidth()
     ) {
-        Text(text = "select display language")
+        Text(text = stringResource(id = TextId.setting_title))
         Spinner(
             selectedItem = selectedLanguage,
             items = languageList,
-            itemLabel = { it.name },
+            itemLabel = { stringResource(id = it.textId) },
             onItemSelected = onLanguageSelected,
             modifier = Modifier
                 .fillMaxWidth()
@@ -65,7 +67,7 @@ fun SettingSection(
                 onClick = onLanguageChanged,
                 enabled = isChangeLanguageEnabled,
             ) {
-                Text(text = "Change")
+                Text(text = stringResource(id = TextId.setting_button))
             }
         }
     }

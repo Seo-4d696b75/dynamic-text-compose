@@ -13,11 +13,10 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import jp.co.yumemi.dynamictextsample.R
+import jp.co.yumemi.dynamictextsample.domain.TextId
 import jp.co.yumemi.dynamictextsample.ui.section.message.MessageSection
 import jp.co.yumemi.dynamictextsample.ui.section.setting.SettingSection
 import jp.co.yumemi.dynamictextsample.ui.theme.DynamicTextSampleTheme
@@ -30,7 +29,7 @@ fun MainScreen() {
             TopAppBar(
                 title = {
                     Text(
-                        text = stringResource(id = R.string.app_name),
+                        text = stringResource(id = TextId.app_bar_title)
                     )
                 }
             )

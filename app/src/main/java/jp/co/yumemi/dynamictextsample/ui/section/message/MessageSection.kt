@@ -13,6 +13,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import jp.co.yumemi.dynamictextsample.R
+import jp.co.yumemi.dynamictextsample.domain.TextId
+import jp.co.yumemi.dynamictextsample.ui.stringResource
 import jp.co.yumemi.dynamictextsample.ui.theme.DynamicTextSampleTheme
 
 @Composable
@@ -24,7 +26,7 @@ fun MessageSection(
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         Text(
-            text = "Hello, Android!",
+            text = stringResource(id = TextId.home_title),
             style = MaterialTheme.typography.titleLarge,
         )
         Image(
@@ -35,7 +37,7 @@ fun MessageSection(
                 .padding(all = 10.dp),
         )
         Text(
-            text = "This is a sample app, where displayed text can be changed dynamically.",
+            text = stringResource(id = TextId.home_body),
             style = MaterialTheme.typography.bodyLarge,
         )
     }
