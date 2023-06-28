@@ -9,11 +9,15 @@ import androidx.compose.material3.dynamicDarkColorScheme
 import androidx.compose.material3.dynamicLightColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.SideEffect
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
+import jp.co.yumemi.dynamictextsample.ui.LocalTextCatalog
+import jp.co.yumemi.dynamictextsample.ui.rememberTextCatalog
 
 private val DarkColorScheme = darkColorScheme(
     primary = Purple80,
@@ -62,9 +66,15 @@ fun DynamicTextSampleTheme(
         }
     }
 
-    MaterialTheme(
-        colorScheme = colorScheme,
-        typography = Typography,
-        content = content
-    )
+    val textCatalog by rememberTextCatalog()
+
+    CompositionLocalProvider(
+        LocalTextCatalog provides textCatalog,
+    ) {
+        MaterialTheme(
+            colorScheme = colorScheme,
+            typography = Typography,
+            content = content
+        )
+    }
 }
