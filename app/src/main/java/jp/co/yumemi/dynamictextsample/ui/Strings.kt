@@ -10,10 +10,11 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalInspectionMode
 import dagger.hilt.EntryPoint
 import dagger.hilt.EntryPoints
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
 import jp.co.yumemi.dynamictextsample.domain.DisplayLanguageRepository
 import jp.co.yumemi.dynamictextsample.domain.TextCatalog
 import jp.co.yumemi.dynamictextsample.domain.TextId
-import java.lang.IllegalArgumentException
 
 val LocalTextCatalog = staticCompositionLocalOf<TextCatalog> {
     TextCatalog.Empty
@@ -21,7 +22,7 @@ val LocalTextCatalog = staticCompositionLocalOf<TextCatalog> {
 
 @Composable
 fun rememberTextCatalog(): State<TextCatalog> {
-    return if(LocalInspectionMode.current) {
+    return if (LocalInspectionMode.current) {
         rememberUpdatedState(newValue = TextCatalog.Empty)
     } else {
         val context = LocalContext.current.applicationContext
@@ -33,13 +34,14 @@ fun rememberTextCatalog(): State<TextCatalog> {
 }
 
 @EntryPoint
+@InstallIn(SingletonComponent::class)
 interface ThemeEntryPoint {
     val displayLanguageRepository: DisplayLanguageRepository
 }
 
 @Composable
 fun stringResource(id: TextId): String {
-    return if(LocalInspectionMode.current) {
+    return if (LocalInspectionMode.current) {
         androidx.compose.ui.res.stringResource(id = id.xmlId)
     } else {
         val catalog = LocalTextCatalog.current
