@@ -10,6 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.lifecycle.lifecycleScope
 import dagger.hilt.android.AndroidEntryPoint
 import jp.co.yumemi.dynamictextsample.domain.BootUseCase
+import jp.co.yumemi.dynamictextsample.domain.TextCatalog
 import jp.co.yumemi.dynamictextsample.ui.theme.DynamicTextSampleTheme
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -29,7 +30,10 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    MainScreen()
+                    when (LocalTextCatalog.current) {
+                        TextCatalog.Initializing -> LoadingScreen()
+                        is TextCatalog.Data -> MainScreen()
+                    }
                 }
             }
         }
