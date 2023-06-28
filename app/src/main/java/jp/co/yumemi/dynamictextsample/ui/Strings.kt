@@ -17,13 +17,13 @@ import jp.co.yumemi.dynamictextsample.domain.TextCatalog
 import jp.co.yumemi.dynamictextsample.domain.TextId
 
 val LocalTextCatalog = staticCompositionLocalOf<TextCatalog> {
-    TextCatalog.Empty
+    TextCatalog.Initializing
 }
 
 @Composable
 fun rememberTextCatalog(): State<TextCatalog> {
     return if (LocalInspectionMode.current) {
-        rememberUpdatedState(newValue = TextCatalog.Empty)
+        rememberUpdatedState(newValue = TextCatalog.Initializing)
     } else {
         val context = LocalContext.current.applicationContext
         val entry = remember(context) {
@@ -44,7 +44,10 @@ fun stringResource(id: TextId): String {
     return if (LocalInspectionMode.current) {
         androidx.compose.ui.res.stringResource(id = id.xmlId)
     } else {
-        val catalog = LocalTextCatalog.current
-        catalog.data[id] ?: throw IllegalArgumentException("string not found. id: $id")
+        when (val catalog = LocalTextCatalog.current) {
+            TextCatalog.Initializing -> throw IllegalStateException("not initialized yet")
+            is TextCatalog.Data -> catalog.data[id]
+                ?: throw IllegalArgumentException("string not found. id: $id")
+        }
     }
 }

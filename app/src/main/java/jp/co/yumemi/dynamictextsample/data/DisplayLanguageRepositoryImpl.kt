@@ -19,7 +19,7 @@ import javax.inject.Inject
 class DisplayLanguageRepositoryImpl @Inject constructor(
     @ApplicationContext private val context: Context,
 ) : DisplayLanguageRepository {
-    private val _catalog = MutableStateFlow(TextCatalog.Empty)
+    private val _catalog = MutableStateFlow<TextCatalog>(TextCatalog.Initializing)
     override val catalog = _catalog.asStateFlow()
 
     @OptIn(ExperimentalSerializationApi::class)
@@ -38,7 +38,7 @@ class DisplayLanguageRepositoryImpl @Inject constructor(
                 id to entry.value
             }
         _catalog.update {
-            TextCatalog(
+            TextCatalog.Data(
                 language = language,
                 data = map,
             )
