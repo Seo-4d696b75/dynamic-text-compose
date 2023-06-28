@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import jp.co.yumemi.dynamictextsample.domain.DisplayLanguage
 import jp.co.yumemi.dynamictextsample.domain.DisplayLanguageRepository
+import jp.co.yumemi.dynamictextsample.domain.TextCatalog
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
@@ -27,7 +28,7 @@ class SettingViewModel @Inject constructor(
         SettingUiState(
             selectedLanguage = selected,
             languageList = DisplayLanguage.values().toList(),
-            isChangeEnabled = selected != catalog.language,
+            isChangeEnabled = !catalog.equalsLanguage(selected),
         )
     }.stateIn(
         viewModelScope,
@@ -42,5 +43,12 @@ class SettingViewModel @Inject constructor(
     fun onDisplayLanguageChanged() {
         val selected = selectedLanguage.value
         displayLanguageRepository.onLanguageChanged(selected)
+    }
+
+    private fun TextCatalog.equalsLanguage(language: DisplayLanguage): Boolean {
+        return when (this) {
+            TextCatalog.Initializing -> false
+            is TextCatalog.Data -> this.language == language
+        }
     }
 }
