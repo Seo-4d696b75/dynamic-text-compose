@@ -1,4 +1,4 @@
-package jp.co.yumemi.dynamictextsample.ui
+package jp.co.yumemi.dynamictextsample.ui.section.message
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column

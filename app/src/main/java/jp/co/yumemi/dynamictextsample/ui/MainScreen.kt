@@ -15,6 +15,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import jp.co.yumemi.dynamictextsample.R
+import jp.co.yumemi.dynamictextsample.ui.section.message.MessageSection
 import jp.co.yumemi.dynamictextsample.ui.theme.DynamicTextSampleTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
