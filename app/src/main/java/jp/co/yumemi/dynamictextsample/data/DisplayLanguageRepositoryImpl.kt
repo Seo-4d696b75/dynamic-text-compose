@@ -4,6 +4,7 @@ import android.content.Context
 import dagger.hilt.android.qualifiers.ApplicationContext
 import jp.co.yumemi.dynamictextsample.domain.DisplayLanguage
 import jp.co.yumemi.dynamictextsample.domain.DisplayLanguageRepository
+import jp.co.yumemi.dynamictextsample.domain.TextCatalog
 import jp.co.yumemi.dynamictextsample.domain.TextId
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -18,13 +19,8 @@ import javax.inject.Inject
 class DisplayLanguageRepositoryImpl @Inject constructor(
     @ApplicationContext private val context: Context,
 ) : DisplayLanguageRepository {
-    private val _provider = MutableStateFlow(
-        TextProviderImpl(
-            language = DisplayLanguage.English,
-            data = emptyMap(),
-        )
-    )
-    override val provider = _provider.asStateFlow()
+    private val _catalog = MutableStateFlow(TextCatalog.Empty)
+    override val catalog = _catalog.asStateFlow()
 
     @OptIn(ExperimentalSerializationApi::class)
     override fun onLanguageChanged(language: DisplayLanguage) {
@@ -41,8 +37,8 @@ class DisplayLanguageRepositoryImpl @Inject constructor(
                 val id = TextId.values().first { it.name == entry.key }
                 id to entry.value
             }
-        _provider.update {
-            TextProviderImpl(
+        _catalog.update {
+            TextCatalog(
                 language = language,
                 data = map,
             )
