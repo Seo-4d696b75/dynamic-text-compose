@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">DynamicTextSample</string>
+    <string name="app_bar_title">SampleApp</string>
+    <string name="home_title">Hello, Android!</string>
+    <string name="home_body">This is a sample app, where displayed text can be changed dynamically.</string>
+    <string name="setting_title">select display language</string>
+    <string name="setting_button">Change</string>
+    <string name="language_english">English</string>
+    <string name="language_japanese">Japanese</string>
+    <string name="language_french">French</string>
+    <string name="language_thai">Thai</string>
 </resources>

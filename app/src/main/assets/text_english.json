@@ -1,0 +1,11 @@
+{
+  "appBarTitle": "SampleApp",
+  "homeTitle": "Hello, Android",
+  "homeBody": "This is a sample app, where displayed text can be changed dynamically.",
+  "settingTitle": "select display language",
+  "settingButtonLabel": "Change",
+  "languageEnglish": "English",
+  "languageJapanese": "Japanese",
+  "languageFrench": "French",
+  "languageThai": "Thai"
+}
