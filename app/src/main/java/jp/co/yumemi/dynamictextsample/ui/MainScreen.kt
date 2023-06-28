@@ -16,8 +16,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import jp.co.yumemi.dynamictextsample.R
-import jp.co.yumemi.dynamictextsample.domain.DisplayLanguage
 import jp.co.yumemi.dynamictextsample.ui.section.message.MessageSection
 import jp.co.yumemi.dynamictextsample.ui.section.setting.SettingSection
 import jp.co.yumemi.dynamictextsample.ui.theme.DynamicTextSampleTheme
@@ -49,9 +49,7 @@ fun MainScreen() {
             )
             Spacer(modifier = Modifier.height(32.dp))
             SettingSection(
-                currentLanguage = DisplayLanguage.English,
-                languageList = DisplayLanguage.values().toList(),
-                onLanguageSelected = {},
+                viewModel = viewModel(),
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(20.dp),

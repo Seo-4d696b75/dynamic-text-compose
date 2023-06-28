@@ -10,17 +10,37 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import jp.co.yumemi.dynamictextsample.domain.DisplayLanguage
 import jp.co.yumemi.dynamictextsample.ui.theme.DynamicTextSampleTheme
 
 @Composable
 fun SettingSection(
-    currentLanguage: DisplayLanguage,
+    viewModel: SettingViewModel,
+    modifier: Modifier = Modifier,
+) {
+    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
+    SettingSection(
+        selectedLanguage = uiState.selectedLanguage,
+        languageList = uiState.languageList,
+        onLanguageSelected = viewModel::onLanguageSelected,
+        isChangeLanguageEnabled = uiState.isChangeEnabled,
+        onLanguageChanged = viewModel::onDisplayLanguageChanged,
+        modifier = modifier,
+    )
+}
+
+@Composable
+fun SettingSection(
+    selectedLanguage: DisplayLanguage,
     languageList: List<DisplayLanguage>,
     onLanguageSelected: (DisplayLanguage) -> Unit,
+    isChangeLanguageEnabled: Boolean,
+    onLanguageChanged: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Column(
@@ -28,7 +48,7 @@ fun SettingSection(
     ) {
         Text(text = "select display language")
         Spinner(
-            selectedItem = currentLanguage,
+            selectedItem = selectedLanguage,
             items = languageList,
             itemLabel = { it.name },
             onItemSelected = onLanguageSelected,
@@ -42,8 +62,8 @@ fun SettingSection(
             modifier = Modifier.fillMaxWidth(),
         ) {
             OutlinedButton(
-                onClick = {},
-                enabled = false,
+                onClick = onLanguageChanged,
+                enabled = isChangeLanguageEnabled,
             ) {
                 Text(text = "Change")
             }
@@ -56,8 +76,10 @@ fun SettingSection(
 fun PreviewSettingSection() {
     DynamicTextSampleTheme {
         SettingSection(
-            currentLanguage = DisplayLanguage.English,
+            selectedLanguage = DisplayLanguage.English,
             languageList = DisplayLanguage.values().toList(),
+            isChangeLanguageEnabled = true,
+            onLanguageChanged = {},
             onLanguageSelected = {},
         )
     }
