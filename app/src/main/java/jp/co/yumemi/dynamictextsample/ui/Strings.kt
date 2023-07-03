@@ -2,13 +2,14 @@ package jp.co.yumemi.dynamictextsample.ui
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.compositionLocalOf
 import androidx.compose.runtime.neverEqualPolicy
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalInspectionMode
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import dagger.hilt.EntryPoint
 import dagger.hilt.EntryPoints
 import dagger.hilt.InstallIn
@@ -32,7 +33,9 @@ fun rememberTextCatalog(): State<TextCatalog> {
         val entry = remember(context) {
             EntryPoints.get(context, ThemeEntryPoint::class.java)
         }
-        entry.displayLanguageRepository.catalog.collectAsState()
+        entry.displayLanguageRepository.catalog.collectAsStateWithLifecycle(
+            minActiveState = Lifecycle.State.RESUMED,
+        )
     }
 }
 
