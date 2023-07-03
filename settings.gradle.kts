@@ -13,4 +13,4 @@ dependencyResolutionManagement {
     }
 }
 rootProject.name = "DynamicTextSample"
-include ':app'
+include(":app")
