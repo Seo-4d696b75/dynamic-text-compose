@@ -1,7 +1,7 @@
 package jp.co.yumemi.dynamictextsample.domain
 
 enum class DisplayLanguage(
-    val tag: String,
+    val code: String,
     val textId: TextId
 ) {
     English("en", TextId.language_english),

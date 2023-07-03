@@ -24,7 +24,7 @@ class DisplayLanguageRepositoryImpl @Inject constructor(
 
     @OptIn(ExperimentalSerializationApi::class)
     override fun onLanguageChanged(language: DisplayLanguage) {
-        val fileName = "text_${language.tag}.json"
+        val fileName = "text_${language.code}.json"
         val serializer = MapSerializer(String.serializer(), String.serializer())
         val map = context
             .assets
